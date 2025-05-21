@@ -2,6 +2,34 @@ import tkinter as tk
 import sqlite3
 from tkinter import messagebox, Toplevel
 
+class Formation:
+    def __init__(self,name, side):
+        self.name = name
+        self.side = side
+        self.qb_position = ()
+        self.center_position = ()
+        self.Player_x_position = ()
+        self.Player_y_position = ()
+        self.Player_z_position = ()
+          
+class Play:
+    def __init__(self, name, side):
+        self.name = name
+        self.side = side
+        self.Throw_forward = ()
+        self.qb_move = ""
+        self.center_move = ""
+        self.x_move = ""
+        self.y_move = ""
+        self.z_move = ""
+        self.throw_back = ()
+        self.qb_player_id = 0
+        self.center_Player_id = 0
+        self.x_player_id = 0
+        self.y_player_id = 0
+        self.z_player_id = 0
+
+
 class Player:
     def __init__(self, name, positions, status="En forme"):
         self.name = name
@@ -180,10 +208,10 @@ class PlaybookApp:
         if self.qb_position.get() == "Under Center":
             self.canvas.create_oval(300-5, 250-5, 300+5, 250+5, fill='purple', tags="quarterback")
         else:  # Shotgun
-            self.canvas.create_oval(300-5, 230-5, 300+5, 230+5, fill='purple', tags="quarterback")
+            self.canvas.create_oval(300-5, 270-5, 300+5, 270+5, fill='purple', tags="quarterback")
 
     def place_center(self):
-        self.canvas.create_oval(300-5, 270-5, 300+5, 270+5, fill='orange', tags="center")
+        self.canvas.create_oval(300-5, 230-5, 300+5, 230+5, fill='orange', tags="center")
 
     def add_route(self, event):
         route_type = self.route_type.get()
@@ -218,7 +246,10 @@ class PlaybookApp:
         elif route_type == "Flat":
             self.canvas.create_line(x, y, x+100, y, fill=colors[route_type], arrow=tk.LAST)
         elif route_type == "Slant":
-            self.canvas.create_line(x, y, x+50, y-50, fill=colors[route_type], arrow=tk.LAST)
+            if x < 300 :
+                self.canvas.create_line(x, y, x, y-30, x+50, y-50, fill=colors[route_type], arrow=tk.LAST)
+            else :
+                self.canvas.create_line(x, y, x, y-30, x-50, y-50, fill=colors[route_type], arrow=tk.LAST)
 
     def __del__(self):
         self.conn.close()
