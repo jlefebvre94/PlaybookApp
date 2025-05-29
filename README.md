@@ -44,6 +44,7 @@
   - Orange : "Fatigué" 
   - Rouge : "Blessé"
   - Gris : "Absent"
+- Les joueurs peuvent avoir les compétences "Coach" et/ou "referee".
 
 ### 3.2 Éditeur de Terrain Interactif (Cœur de l'Application)
 
